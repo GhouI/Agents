@@ -20,49 +20,7 @@ import { config } from '@/lib/ai/config';
  * - Responsive design with sidebar
  */
 export default function AgentsXApp() {
-  // Sample messages for demo
-  const [messages, setMessages] = useState<Message[]>([
-    { id: 1, role: 'user', content: 'What is the current stock price of NVDA?' },
-    {
-      id: 2,
-      role: 'ai',
-      tools: [{ type: 'search', query: 'NVIDIA Corporation (NVDA) stock price' }],
-      content:
-        'As of market close, NVIDIA Corporation (NVDA) is trading at $124.30, up 2.4% for the day. The market cap currently stands at $3.1T.',
-    },
-    {
-      id: 3,
-      role: 'user',
-      content: 'Can you run a sentiment analysis on their latest earnings call?',
-    },
-    {
-      id: 4,
-      role: 'ai',
-      tools: [
-        { type: 'file_search', query: 'NVDA_Q2_2025_Transcript.pdf' },
-        {
-          type: 'code_interpreter',
-          code: 'analyze_sentiment(transcript_data)',
-          status: 'running',
-        },
-      ],
-      content:
-        "I've processed the transcript from the Q2 earnings call. The overall sentiment score is 0.85 (Very Positive). Key themes include 'Data Center growth', 'Blackwell demand', and 'Supply chain improvements'.",
-    },
-    { id: 5, role: 'user', content: 'Generate a cover image for this report.' },
-    {
-      id: 6,
-      role: 'ai',
-      tools: [
-        {
-          type: 'image_generation',
-          prompt: 'Futuristic data center with green glowing lights, cinematic 8k render',
-          status: 'complete',
-        },
-      ],
-      content: 'Here is a generated image representing the data center growth discussed in the report.',
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const [inputValue, setInputValue] = useState('');
   const [selectedModelId, setSelectedModelId] = useState('claude-sonnet-4-5');
@@ -81,27 +39,7 @@ export default function AgentsXApp() {
   }));
 
   // History data
-  const historyGroups: HistoryGroup[] = [
-    {
-      label: 'Today',
-      items: [
-        { id: 1, title: 'Integration Metrics Q3' },
-        { id: 6, title: 'React Component Library' },
-      ],
-    },
-    {
-      label: 'Yesterday',
-      items: [{ id: 2, title: 'Debug Auth Protocol' }],
-    },
-    {
-      label: 'Previous 7 Days',
-      items: [
-        { id: 3, title: 'New Agent Workflow' },
-        { id: 4, title: 'Documentation Review' },
-        { id: 5, title: 'API Rate Limiting' },
-      ],
-    },
-  ];
+  const historyGroups: HistoryGroup[] = [];
 
   // Auto-scroll to bottom on new messages
   useEffect(() => {
